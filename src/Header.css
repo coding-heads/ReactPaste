@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+
+.Header{
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top:0;
+  width: 100vw;
+  height: 15vh;
+  background:linear-gradient(black,rgb(18, 18, 18));
+  left:0;
+}
+
+.Title{
+  font-size: min(4vw,4vh);
+}
+.Title i{
+  color:rgb(189, 89, 141);
+}
+
+.HeaderContent{
+
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navLinks{
+  width:30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.navLinks a{
+  height: 100%;
+  width: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:rgb(189, 89, 141);
+
+}
+.navLinks a:hover{
+
+  background: linear-gradient(#00000000,rgba(233, 110, 174, 0.216));
+  color:rgb(162, 163, 192);
+}
