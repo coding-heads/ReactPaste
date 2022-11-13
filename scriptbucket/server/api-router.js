@@ -1,8 +1,41 @@
 import express from "express";
 const apiRouter = express.Router();
-
 import db from "./database/db.js";
-const demoPastes = ["Hello Demon", "also hell more text", "yes infinite text"];
+import jwt from "jsonwebtoken";
+
+import {
+  emailvalidator,
+  passwordvalidator,
+  generateAccessToken,
+} from "./database/utils.js";
+
+apiRouter.get("/user/auth", async (req, res) => {
+  console.log(req?.cookies);
+  const authHeader = req?.cookies?.authorized || null;
+  const token = authHeader;
+  console.log(process.env.SECRET);
+  console.log(token);
+  if (token == null) return res.json("false");
+  try {
+    const { id } = jwt.verify(token, process.env.SECRET);
+    res.json({ id: id });
+  } catch (err) {
+    res.json("false");
+  }
+});
+apiRouter.post("/user/login", async (req, res) => {
+  if (req?.body?.email && req?.body?.password) {
+    if (!emailvalidator(req.body.email)) return res.json("Invalid Credentials");
+    if (!passwordvalidator(req.body.password))
+      return res.json("Invalid Credentials");
+    let user = await db.checkLogin(req.body.email, req.body.password);
+    if (!user) return res.json("Invalid Credentials");
+    return res.json({ token: generateAccessToken(user.username) });
+  } else {
+    res.json("credentials not provided");
+  }
+});
+apiRouter.get("/user", (req, res) => {});
 apiRouter.get("/paste/recent", async (req, res) => {
   let pastes = await db.getRecentPastes();
   res.json({ pastes });

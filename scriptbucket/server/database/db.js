@@ -116,5 +116,6 @@ const db = {
   insertComment,
   getCommentsOnPaste,
   getRecentPastes,
+  checkLogin,
 };
 export default db;

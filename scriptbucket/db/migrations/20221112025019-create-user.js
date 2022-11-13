@@ -1,5 +1,6 @@
 "use strict";
 /** @type {import('sequelize-cli').Migration} */
+const crypto = require("crypto");
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Users", {
@@ -22,6 +23,7 @@ module.exports = {
       },
       salt: {
         type: Sequelize.STRING,
+        //defaultValue: (() => crypto.randomBytes(16).toString("hex"))(),
       },
       createdAt: {
         allowNull: false,

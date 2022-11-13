@@ -43,7 +43,7 @@ function Editor() {
     <div className="App">
       <div className="editorControls">
         <div className="leftSide">
-          <i class="fa-solid fa-angle-right"></i>
+          <i className="fa-solid fa-angle-right"></i>
           <input
             placeholder={"filename"}
             onChange={(e) => setFilename(e.target.value)}
@@ -71,8 +71,8 @@ function Editor() {
           <span style={style2}> Private</span>
         </div>
         <div className="rightSide">
-          <i class="fa-solid fa-trash"></i>
-          <i class="fa-solid fa-floppy-disk" onClick={savePost}></i>
+          <i className="fa-solid fa-trash"></i>
+          <i className="fa-solid fa-floppy-disk" onClick={savePost}></i>
         </div>
       </div>
       <div className="editorBin">
