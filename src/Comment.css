@@ -1,0 +1,23 @@
+.commentDiv {
+  box-sizing: border-box;
+  width: 90%;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+  color: rgb(91, 96, 96);
+}
+.commentDiv:hover {
+  color: aliceblue;
+}
+.commentDivUsername {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.5rem;
+  margin-left: 0.2rem;
+  color: rgb(129, 52, 136);
+}
+.commentDivContent {
+  margin-left: 0.5rem;
+  text-align: left;
+}

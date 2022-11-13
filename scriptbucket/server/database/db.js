@@ -33,10 +33,29 @@ async function getRecentPastes() {
   pastes = pastes.map((p) => p.dataValues);
   return pastes;
 }
+async function getIDFromUsername(username) {
+  console.log(2323425464646454566452493);
+  let id = await User.findOne({
+    where: { username: username },
+  });
+  return id.id;
+}
 async function getCommentsOnPaste(id) {
   let comments = await Comment.findAll({
+    include: {
+      model: User,
+      as: "user",
+      attributes: ["id", "username"],
+    },
     where: { paste_id: id },
-    attributes: ["text", "selection_end", "selection_start"],
+    attributes: [
+      "user.id",
+      "user.username",
+      "id",
+      "text",
+      "selection_start",
+      "selection_end",
+    ],
   });
 
   comments = comments.map((c) => c.dataValues);
@@ -54,7 +73,8 @@ async function insertPaste(content, userid = 1, priv = 0) {
   return newPaste ? { lastID: newPaste.id } : undefined;
 }
 
-async function insertComment(content, p_id, u_id = 1, s_start, s_end) {
+async function insertComment(content, p_id, u_id, s_start, s_end) {
+  console.log("000-0--0-0--0-00-0-0- ", u_id);
   let newComment = Comment.create({
     text: content,
     paste_id: p_id,
@@ -117,5 +137,6 @@ const db = {
   getCommentsOnPaste,
   getRecentPastes,
   checkLogin,
+  getIDFromUsername,
 };
 export default db;

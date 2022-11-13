@@ -58,18 +58,22 @@ function View() {
   async function updateComments() {
     let commentOb = await fetch("/api/v1/comment/" + params.id);
     commentOb = await commentOb.json();
-    console.log(commentOb);
     setComments([]);
     for (let i of commentOb.comments) {
-      //console.log(i.selection_start)
       i.selection_end++;
       setComments((comments) => [
         comments,
         ...[
           <div
+            className="commentDivOuter"
             onMouseOver={() => highlight(i.selection_start, i.selection_end)}
+            onMouseLeave={() => clearHighlights()}
           >
-            <Comment content={i.text}></Comment>
+            <Comment
+              content={i.text}
+              username={i?.user?.username}
+              id={i?.user?.id}
+            ></Comment>
           </div>,
         ],
       ]);
@@ -122,7 +126,6 @@ function View() {
         body: JSON.stringify({
           content: e.target.value,
           paste_id: params.id,
-          user_id: 1,
           s_start: start_r,
           s_end: end_r,
         }),

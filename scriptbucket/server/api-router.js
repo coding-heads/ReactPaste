@@ -9,12 +9,23 @@ import {
   generateAccessToken,
 } from "./database/utils.js";
 
-apiRouter.get("/user/auth", async (req, res) => {
-  console.log(req?.cookies);
+async function authMiddle(req, res, next) {
   const authHeader = req?.cookies?.authorized || null;
   const token = authHeader;
-  console.log(process.env.SECRET);
-  console.log(token);
+  if (token == null) return res.json("unauth");
+  try {
+    const { id } = jwt.verify(token, process.env.SECRET);
+    let user = await db.getIDFromUsername(id);
+    req.userID = user;
+  } catch {
+    return res.json("unauth");
+  }
+  next();
+}
+
+apiRouter.get("/user/auth", async (req, res) => {
+  const authHeader = req?.cookies?.authorized || null;
+  const token = authHeader;
   if (token == null) return res.json("false");
   try {
     const { id } = jwt.verify(token, process.env.SECRET);
@@ -52,12 +63,12 @@ apiRouter.post("/paste/:a", async (req, res) => {
   row = await db.insertPaste(row.content);
   res.json({ id: row.lastID });
 });
-apiRouter.post("/comment/:a", async (req, res) => {
+apiRouter.post("/comment/:a", authMiddle, async (req, res) => {
   let row = req.body;
   row = await db.insertComment(
     row.content,
     row.paste_id,
-    row.user_id,
+    req.userID,
     row.s_start,
     row.s_end
   );

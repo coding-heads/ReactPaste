@@ -4,5 +4,6 @@ module.exports = {
   development: {
     storage: "./scriptbucket/" + process.env.DB,
     dialect: "sqlite",
+    loggin: false,
   },
 };

@@ -9,6 +9,10 @@
   overflow: hidden;
   background: linear-gradient(rgb(23, 18, 22), rgb(31, 31, 31));
 }
+.commentDivOuter {
+  display: flex;
+  justify-content: center;
+}
 * {
   box-sizing: border-box;
 }
