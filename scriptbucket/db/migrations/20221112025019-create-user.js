@@ -25,6 +25,9 @@ module.exports = {
         type: Sequelize.STRING,
         //defaultValue: (() => crypto.randomBytes(16).toString("hex"))(),
       },
+      color: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

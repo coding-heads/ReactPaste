@@ -44,11 +44,25 @@ function View() {
       }
     }
   }
-  function highlight(start, end) {
+  function highlight(start, end, color) {
     clearHighlights();
+    editorRef.current.editor.setOption(
+      editorRef.current.editor.$options.animatedScroll.name,
+      true
+    );
+    editorRef.current.editor.renderer.STEPS = 25;
+    editorRef.current.editor.scrollToLine(end, true, true, function() {});
+    editorRef.current.editor.renderer.STEPS = 8;
+    editorRef.current.editor
+      .getSession()
+      .addMarker(
+        new Range(start, 0, end, 0),
+        "userColor" + color,
+        "information"
+      );
 
     editorRef.current.editor.addSelectionMarker(
-      new Range(start, 0, end, 2),
+      new Range(start, 0, end, 0),
       "warning-marker",
       "fullLine"
     );
@@ -66,7 +80,9 @@ function View() {
         ...[
           <div
             className="commentDivOuter"
-            onMouseOver={() => highlight(i.selection_start, i.selection_end)}
+            onMouseOver={() =>
+              highlight(i.selection_start, i.selection_end, i?.user?.color)
+            }
             onMouseLeave={() => clearHighlights()}
           >
             <Comment

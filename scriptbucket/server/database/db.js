@@ -45,12 +45,13 @@ async function getCommentsOnPaste(id) {
     include: {
       model: User,
       as: "user",
-      attributes: ["id", "username"],
+      attributes: ["id", "username", "color"],
     },
     where: { paste_id: id },
     attributes: [
       "user.id",
       "user.username",
+      "user.color",
       "id",
       "text",
       "selection_start",

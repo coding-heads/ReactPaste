@@ -52,5 +52,7 @@ async function checkLogin(email, password) {
 }
 (async () => {
   let a = await makeUser("brandbrand", "password1!", "brandonetter@gmail.com");
+  let b = await makeUser("thenlie", "password1!", "thenlie@email.com");
+  let c = await makeUser("cleverdumb", "password1!", "clever@dumb.com");
   console.log(a);
 })();

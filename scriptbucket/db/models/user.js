@@ -27,9 +27,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       username: DataTypes.STRING,
       email: DataTypes.STRING,
+      color: {
+        type: DataTypes.STRING,
+        defaultValue: () =>
+          ["Lime", "Pink", "Orange", "Red", "Purple", "Blue", "White"][
+            ~~(Math.random() * 7)
+          ],
+      },
       salt: {
         type: DataTypes.STRING,
-        defaultValue: crypto.randomBytes(16).toString("hex"),
+        defaultValue: () => crypto.randomBytes(16).toString("hex"),
       },
       password: {
         type: DataTypes.STRING,

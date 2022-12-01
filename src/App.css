@@ -9,6 +9,49 @@
   overflow: hidden;
   background: linear-gradient(rgb(23, 18, 22), rgb(31, 31, 31));
 }
+.userColorLime {
+  position: absolute;
+  z-index: 200;
+  background-color: greenyellow;
+  opacity: 0.25;
+}
+.userColorRed {
+  position: absolute;
+  z-index: 200;
+  background-color: rgb(255, 0, 0);
+  opacity: 0.25;
+}
+.userColorWhite {
+  position: absolute;
+  z-index: 200;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.25;
+}
+.userColorBlue {
+  position: absolute;
+  z-index: 200;
+  background-color: blue;
+  opacity: 0.25;
+}
+.userColorPurple {
+  position: absolute;
+  z-index: 200;
+  background-color: purple;
+  opacity: 0.25;
+}
+.userColorOrange {
+  position: absolute;
+  z-index: 200;
+  background-color: orange;
+  opacity: 0.25;
+}
+.userColorPink {
+  position: absolute;
+  z-index: 200;
+  background-color: pink;
+  opacity: 0.25;
+}
+
 .commentDivOuter {
   display: flex;
   justify-content: center;
